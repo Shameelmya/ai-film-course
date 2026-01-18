@@ -49,8 +49,6 @@ const AIFilmCourse = () => {
     const buildingShareAmt = grossProfit > 0 ? (grossProfit * 0.2) : 0;
 
     // Cycle projections
-    // Next cycle profit = Gross Profit + Setup Cost (saved)
-    // Note: User mentioned marketing cost might reduce, but for calculation we keep standard, just adding text note.
     const nextCycleProfit = grossProfit + setupCost;
     
     const nextCycleDotShare = nextCycleProfit > 0 ? (nextCycleProfit * 0.8) : 0;
@@ -157,7 +155,7 @@ const AIFilmCourse = () => {
         doc.text("Dot Projects", 20, 20);
         doc.setFontSize(14);
         doc.setFont("helvetica", "normal");
-        doc.text("AI Film Making Course - Financial Projection", 20, 30);
+        doc.text("Advanced AI Film Making - Financial Projection", 20, 30);
         
         doc.setTextColor(100, 100, 100);
         doc.setFontSize(10);
@@ -392,32 +390,39 @@ const AIFilmCourse = () => {
 
   return (
     <div className="min-h-screen bg-slate-900 text-gray-100 p-4 md:p-8 font-sans">
-      <div className="max-w-4xl mx-auto space-y-8">
+      <div className="max-w-4xl mx-auto space-y-6 md:space-y-8">
         
         {/* Header */}
-        <div className="bg-gradient-to-r from-violet-900 to-slate-800 rounded-2xl p-8 shadow-2xl border border-violet-700/30">
+        <div className="bg-gradient-to-r from-violet-900 to-slate-800 rounded-2xl p-6 md:p-8 shadow-2xl border border-violet-700/30">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-            <div>
+            <div className="flex-1">
               <div className="flex items-center gap-2 mb-2">
-                <Film className="w-6 h-6 text-violet-400" />
-                <span className="text-violet-300 font-semibold tracking-wide uppercase text-sm">Course Blueprint</span>
+                <Film className="w-5 h-5 md:w-6 md:h-6 text-violet-400" />
+                <span className="text-violet-300 font-semibold tracking-wide uppercase text-xs md:text-sm">Course Blueprint</span>
               </div>
-              <h1 className="text-4xl font-bold mb-2 text-white">AI Film Making Course</h1>
-              <div className="flex flex-wrap gap-4 text-gray-300 text-sm">
+              <h1 className="text-3xl md:text-4xl font-bold mb-2 text-white leading-tight">Advanced AI Film Making</h1>
+              <div className="flex flex-wrap gap-x-4 gap-y-2 text-gray-300 text-sm">
                 <div className="flex items-center gap-1"><Calendar className="w-4 h-4" /> 10 Weeks (2.5 Months)</div>
                 <div className="flex items-center gap-1"><Clock className="w-4 h-4" /> 135 Hours</div>
                 <div className="flex items-center gap-1"><CheckCircle className="w-4 h-4" /> Industry-Optimized</div>
               </div>
             </div>
-            <div className="text-right bg-black/20 p-4 rounded-xl backdrop-blur-sm">
-              <div className="text-3xl font-bold text-white flex justify-end">
-                <EditableAmount value={regularFee} onChange={setRegularFee} allowEdit={false} />
+            <div className="w-full md:w-auto text-right bg-black/20 p-4 rounded-xl backdrop-blur-sm">
+              <div className="flex md:block justify-between items-center md:space-y-0">
+                <span className="md:hidden text-gray-400 text-sm">Regular Fee</span>
+                <div className="text-2xl md:text-3xl font-bold text-white flex justify-end">
+                    <EditableAmount value={regularFee} onChange={setRegularFee} allowEdit={false} />
+                </div>
               </div>
-              <div className="text-gray-400 text-sm">Regular Fee</div>
-              <div className="mt-2 text-xl font-semibold text-emerald-400 flex justify-end">
-                <EditableAmount value={earlyBirdFee} onChange={setEarlyBirdFee} allowEdit={false} />
+              <div className="hidden md:block text-gray-400 text-sm">Regular Fee</div>
+              
+              <div className="flex md:block justify-between items-center md:space-y-0 mt-2 md:mt-0">
+                <span className="md:hidden text-emerald-200/70 text-xs">Early Bird (First {earlyBirdLimit})</span>
+                <div className="text-lg md:text-xl font-semibold text-emerald-400 flex justify-end">
+                    <EditableAmount value={earlyBirdFee} onChange={setEarlyBirdFee} allowEdit={false} />
+                </div>
               </div>
-              <div className="text-emerald-200/70 text-xs">Early Bird (First {earlyBirdLimit})</div>
+              <div className="hidden md:block text-emerald-200/70 text-xs">Early Bird (First {earlyBirdLimit})</div>
             </div>
           </div>
         </div>
@@ -428,7 +433,7 @@ const AIFilmCourse = () => {
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`px-6 py-3 rounded-lg font-semibold transition-all flex-1 ${
+              className={`px-4 md:px-6 py-3 rounded-lg font-semibold text-sm md:text-base transition-all flex-1 whitespace-nowrap ${
                 activeTab === tab 
                   ? 'bg-purple-600 text-white shadow-lg shadow-purple-900/50' 
                   : 'text-gray-400 hover:bg-slate-700/50 hover:text-gray-200'
@@ -445,16 +450,16 @@ const AIFilmCourse = () => {
         {activeTab === 'financials' && (
           <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
             
-            {/* Planner Configuration */}
+            {/* Planner Configuration - Updated Responsive Grid */}
             <div className="bg-slate-800 p-6 rounded-xl border border-purple-500/30 shadow-lg shadow-purple-900/10">
                 <h3 className="text-lg font-bold text-white mb-6 flex items-center gap-2">
                     <Calculator className="w-5 h-5 text-purple-400"/> Planner Configuration
                 </h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-6">
                     <div className="space-y-2">
-                        <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Students / Batch</label>
+                        <label className="text-[10px] md:text-xs font-semibold text-gray-400 uppercase tracking-wider">Students / Batch</label>
                         <div className="flex items-center gap-3 bg-slate-900 p-2 rounded-lg border border-slate-700">
-                            <Users className="w-4 h-4 text-gray-500"/>
+                            <Users className="w-4 h-4 text-gray-500 shrink-0"/>
                             <input 
                                 type="number" 
                                 value={studentCount}
@@ -464,9 +469,9 @@ const AIFilmCourse = () => {
                         </div>
                     </div>
                     <div className="space-y-2">
-                        <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Early Bird Limit</label>
+                        <label className="text-[10px] md:text-xs font-semibold text-gray-400 uppercase tracking-wider">Early Bird Limit</label>
                         <div className="flex items-center gap-3 bg-slate-900 p-2 rounded-lg border border-slate-700">
-                            <Award className="w-4 h-4 text-yellow-500"/>
+                            <Award className="w-4 h-4 text-yellow-500 shrink-0"/>
                             <input 
                                 type="number" 
                                 value={earlyBirdLimit}
@@ -476,9 +481,9 @@ const AIFilmCourse = () => {
                         </div>
                     </div>
                     <div className="space-y-2">
-                        <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Parallel Batches</label>
+                        <label className="text-[10px] md:text-xs font-semibold text-gray-400 uppercase tracking-wider">Parallel Batches</label>
                         <div className="flex items-center gap-3 bg-slate-900 p-2 rounded-lg border border-slate-700">
-                            <Clock className="w-4 h-4 text-gray-500"/>
+                            <Clock className="w-4 h-4 text-gray-500 shrink-0"/>
                             <input 
                                 type="number" 
                                 min="1"
@@ -491,9 +496,9 @@ const AIFilmCourse = () => {
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Regular Fee (₹)</label>
+                        <label className="text-[10px] md:text-xs font-semibold text-gray-400 uppercase tracking-wider">Regular Fee (₹)</label>
                         <div className="flex items-center gap-3 bg-slate-900 p-2 rounded-lg border border-slate-700">
-                            <Tag className="w-4 h-4 text-purple-400"/>
+                            <Tag className="w-4 h-4 text-purple-400 shrink-0"/>
                             <input 
                                 type="number" 
                                 value={regularFee}
@@ -503,9 +508,9 @@ const AIFilmCourse = () => {
                         </div>
                     </div>
                     <div className="space-y-2">
-                        <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Early Bird Fee (₹)</label>
+                        <label className="text-[10px] md:text-xs font-semibold text-gray-400 uppercase tracking-wider">Early Bird Fee (₹)</label>
                         <div className="flex items-center gap-3 bg-slate-900 p-2 rounded-lg border border-slate-700">
-                            <Tag className="w-4 h-4 text-emerald-400"/>
+                            <Tag className="w-4 h-4 text-emerald-400 shrink-0"/>
                             <input 
                                 type="number" 
                                 value={earlyBirdFee}
@@ -515,10 +520,10 @@ const AIFilmCourse = () => {
                         </div>
                     </div>
                     <div className="space-y-2">
-                        <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Building Share</label>
+                        <label className="text-[10px] md:text-xs font-semibold text-gray-400 uppercase tracking-wider">Building Share</label>
                         <div className="flex items-center gap-3 bg-slate-800 p-2 rounded-lg border border-slate-700 opacity-60">
-                            <Building className="w-4 h-4 text-gray-500"/>
-                            <span className="text-white font-mono text-sm">20% of Net Profit</span>
+                            <Building className="w-4 h-4 text-gray-500 shrink-0"/>
+                            <span className="text-white font-mono text-xs">20% Fixed</span>
                         </div>
                     </div>
                 </div>
@@ -531,19 +536,19 @@ const AIFilmCourse = () => {
                   <TrendingUp className="w-5 h-5" /> Revenue Projection
                 </h3>
                 <div className="space-y-4">
-                  <div className="flex justify-between items-center p-3 bg-slate-900/50 rounded-lg">
-                    <div>
-                      <div className="text-gray-300">Early Bird (First {earlyBirdLimit * batchCount})</div>
-                      <div className="text-xs text-gray-500">{financials.revenue.earlyBirdCount} Students × ₹{earlyBirdFee.toLocaleString('en-IN')}</div>
+                  <div className="flex justify-between items-center p-3 bg-slate-900/50 rounded-lg gap-2">
+                    <div className="min-w-0">
+                      <div className="text-gray-300 truncate">Early Bird (First {earlyBirdLimit * batchCount})</div>
+                      <div className="text-xs text-gray-500 truncate">{financials.revenue.earlyBirdCount} Students × ₹{earlyBirdFee.toLocaleString('en-IN')}</div>
                     </div>
-                    <div className="font-mono font-bold text-emerald-300">₹{(financials.revenue.earlyBirdCount * earlyBirdFee).toLocaleString('en-IN')}</div>
+                    <div className="font-mono font-bold text-emerald-300 whitespace-nowrap">₹{(financials.revenue.earlyBirdCount * earlyBirdFee).toLocaleString('en-IN')}</div>
                   </div>
-                  <div className="flex justify-between items-center p-3 bg-slate-900/50 rounded-lg">
-                    <div>
-                      <div className="text-gray-300">Regular Fee</div>
-                      <div className="text-xs text-gray-500">{financials.revenue.regularCount} Students × ₹{regularFee.toLocaleString('en-IN')}</div>
+                  <div className="flex justify-between items-center p-3 bg-slate-900/50 rounded-lg gap-2">
+                    <div className="min-w-0">
+                      <div className="text-gray-300 truncate">Regular Fee</div>
+                      <div className="text-xs text-gray-500 truncate">{financials.revenue.regularCount} Students × ₹{regularFee.toLocaleString('en-IN')}</div>
                     </div>
-                    <div className="font-mono font-bold text-emerald-300">₹{(financials.revenue.regularCount * regularFee).toLocaleString('en-IN')}</div>
+                    <div className="font-mono font-bold text-emerald-300 whitespace-nowrap">₹{(financials.revenue.regularCount * regularFee).toLocaleString('en-IN')}</div>
                   </div>
                   <div className="border-t border-emerald-500/30 pt-4 flex justify-between items-center">
                     <div className="font-bold text-gray-100">Total Revenue</div>
@@ -558,32 +563,32 @@ const AIFilmCourse = () => {
                   <DollarSign className="w-5 h-5" /> Operational Expenses
                 </h3>
                 <div className="space-y-3">
-                   <div className="flex justify-between text-sm items-center">
-                    <span className="text-gray-400">Main Instructor (Monthly)</span>
+                   <div className="flex justify-between text-sm items-center gap-2">
+                    <span className="text-gray-400 truncate">Main Instructor (Monthly)</span>
                     <EditableAmount value={mainInstructorFee} onChange={setMainInstructorFee} />
                    </div>
-                   <div className="flex justify-between text-sm items-center">
-                    <span className="text-gray-400">Support Staff (Monthly)</span>
+                   <div className="flex justify-between text-sm items-center gap-2">
+                    <span className="text-gray-400 truncate">Support Staff (Monthly)</span>
                     <EditableAmount value={supportStaffFee} onChange={setSupportStaffFee} />
                    </div>
-                   <div className="flex justify-between text-sm items-center">
-                    <span className="text-gray-400">Admin Manager (Monthly)</span>
+                   <div className="flex justify-between text-sm items-center gap-2">
+                    <span className="text-gray-400 truncate">Admin Manager (Monthly)</span>
                     <EditableAmount value={adminManagerFee} onChange={setAdminManagerFee} />
                    </div>
-                   <div className="flex justify-between text-sm items-center">
-                    <span className="text-gray-400">Marketing (Monthly)</span>
+                   <div className="flex justify-between text-sm items-center gap-2">
+                    <span className="text-gray-400 truncate">Marketing (Monthly)</span>
                     <EditableAmount value={marketingFee} onChange={setMarketingFee} />
                    </div>
-                   <div className="flex justify-between text-sm items-center">
-                    <span className="text-gray-400">Software (Total Cycle)</span>
+                   <div className="flex justify-between text-sm items-center gap-2">
+                    <span className="text-gray-400 truncate">Software (Total Cycle)</span>
                     <EditableAmount value={softwareFee} onChange={setSoftwareFee} />
                    </div>
-                   <div className="flex justify-between text-sm items-center">
-                    <span className="text-gray-400">Company Setup (Total Cycle)</span>
+                   <div className="flex justify-between text-sm items-center gap-2">
+                    <span className="text-gray-400 truncate">Company Setup (Total Cycle)</span>
                     <EditableAmount value={setupFee} onChange={setSetupFee} />
                    </div>
-                   <div className="flex justify-between text-sm items-center pb-2 border-b border-slate-700">
-                    <span className="text-gray-400">Cert Cost / Student</span>
+                   <div className="flex justify-between text-sm items-center pb-2 border-b border-slate-700 gap-2">
+                    <span className="text-gray-400 truncate">Cert Cost / Student</span>
                     <EditableAmount value={certFeePerStudent} onChange={setCertFeePerStudent} />
                    </div>
 
@@ -596,10 +601,10 @@ const AIFilmCourse = () => {
             </div>
 
             {/* Post-Profit Split Analysis */}
-            <div className="bg-slate-800 p-8 rounded-xl border border-emerald-500/30">
+            <div className="bg-slate-800 p-6 md:p-8 rounded-xl border border-emerald-500/30">
               <div className="text-center mb-8">
                 <h3 className="text-gray-400 font-semibold mb-2 uppercase text-xs tracking-widest">Net Projected Profit (First Cycle / 2.5 Months)</h3>
-                <div className="text-5xl font-bold text-white font-mono">
+                <div className="text-4xl md:text-5xl font-bold text-white font-mono">
                   ₹{financials.profit.toLocaleString('en-IN', {maximumFractionDigits: 0})}
                 </div>
                 <div className="text-emerald-400 text-sm mt-2 font-medium">{financials.margin.toFixed(1)}% Profit Margin</div>
@@ -608,11 +613,11 @@ const AIFilmCourse = () => {
               <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
                 {/* Dot Projects Share */}
                 <div className="bg-slate-900/80 p-5 rounded-xl border-l-4 border-purple-500 shadow-xl">
-                    <div className="flex justify-between items-start mb-2">
+                    <div className="flex justify-between items-start mb-2 gap-2">
                         <div className="text-purple-400 font-bold uppercase tracking-wider text-xs flex items-center gap-1">
-                            <ShieldCheck size={14}/> Dot Projects Share (80%)
+                            <ShieldCheck size={14} className="shrink-0"/> Dot Projects Share (80%)
                         </div>
-                        <div className="text-xl font-bold text-white font-mono">
+                        <div className="text-xl font-bold text-white font-mono whitespace-nowrap">
                              ₹{financials.dotProjectsShare.toLocaleString('en-IN', {maximumFractionDigits: 0})}
                         </div>
                     </div>
@@ -625,11 +630,11 @@ const AIFilmCourse = () => {
 
                 {/* Building Share */}
                 <div className="bg-slate-900/80 p-5 rounded-xl border-l-4 border-amber-500 shadow-xl">
-                    <div className="flex justify-between items-start mb-2">
+                    <div className="flex justify-between items-start mb-2 gap-2">
                         <div className="text-amber-500 font-bold uppercase tracking-wider text-xs flex items-center gap-1">
-                            <Building size={14}/> Building Share (20%)
+                            <Building size={14} className="shrink-0"/> Building Share (20%)
                         </div>
-                        <div className="text-xl font-bold text-white font-mono">
+                        <div className="text-xl font-bold text-white font-mono whitespace-nowrap">
                              ₹{financials.buildingShareAmt.toLocaleString('en-IN', {maximumFractionDigits: 0})}
                         </div>
                     </div>
@@ -645,7 +650,7 @@ const AIFilmCourse = () => {
                   onClick={() => setShowProjections(!showProjections)}
                   className="w-full p-4 flex items-center justify-between hover:bg-slate-800/50 transition-colors"
                 >
-                  <div className="font-bold text-white flex items-center gap-2">
+                  <div className="font-bold text-white flex items-center gap-2 text-sm md:text-base">
                      <TrendingUp className="w-4 h-4 text-purple-400"/>
                      <span>Annual Expectation & Future Cycles (Detailed)</span>
                   </div>
@@ -653,7 +658,7 @@ const AIFilmCourse = () => {
                 </button>
 
                 {showProjections && (
-                  <div className="p-6 border-t border-slate-700 bg-slate-800/30">
+                  <div className="p-4 md:p-6 border-t border-slate-700 bg-slate-800/30">
                      <p className="text-xs text-gray-400 italic mb-6 text-center">
                         *Note: With word-of-mouth publicity in future cycles, marketing costs are expected to reduce, potentially increasing net profit.
                      </p>
@@ -662,18 +667,18 @@ const AIFilmCourse = () => {
                          {/* Row 1: Next Cycle */}
                          <div>
                              <h4 className="text-sm font-bold text-gray-300 border-b border-gray-600 pb-2 mb-3">Next Cycle Projection (Single)</h4>
-                             <div className="grid grid-cols-3 gap-4">
-                                <div className="p-3 bg-slate-900 rounded-lg border border-slate-700/50">
-                                    <p className="text-[10px] text-gray-500 uppercase font-bold tracking-wider mb-1">Total Net Profit</p>
-                                    <p className="text-lg font-mono font-bold text-emerald-400">₹{financials.nextCycleProfit.toLocaleString('en-IN')}</p>
+                             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                <div className="p-3 bg-slate-900 rounded-lg border border-slate-700/50 flex justify-between sm:block items-center">
+                                    <p className="text-[10px] text-gray-500 uppercase font-bold tracking-wider sm:mb-1">Total Net Profit</p>
+                                    <p className="text-base sm:text-lg font-mono font-bold text-emerald-400">₹{financials.nextCycleProfit.toLocaleString('en-IN')}</p>
                                 </div>
-                                <div className="p-3 bg-slate-900 rounded-lg border border-slate-700/50">
-                                    <p className="text-[10px] text-purple-400 uppercase font-bold tracking-wider mb-1">Dot Share (80%)</p>
-                                    <p className="text-lg font-mono text-gray-200">₹{financials.nextCycleDotShare.toLocaleString('en-IN')}</p>
+                                <div className="p-3 bg-slate-900 rounded-lg border border-slate-700/50 flex justify-between sm:block items-center">
+                                    <p className="text-[10px] text-purple-400 uppercase font-bold tracking-wider sm:mb-1">Dot Share (80%)</p>
+                                    <p className="text-base sm:text-lg font-mono text-gray-200">₹{financials.nextCycleDotShare.toLocaleString('en-IN')}</p>
                                 </div>
-                                <div className="p-3 bg-slate-900 rounded-lg border border-slate-700/50">
-                                    <p className="text-[10px] text-amber-500 uppercase font-bold tracking-wider mb-1">Bldg Share (20%)</p>
-                                    <p className="text-lg font-mono text-gray-200">₹{financials.nextCycleBuildingShare.toLocaleString('en-IN')}</p>
+                                <div className="p-3 bg-slate-900 rounded-lg border border-slate-700/50 flex justify-between sm:block items-center">
+                                    <p className="text-[10px] text-amber-500 uppercase font-bold tracking-wider sm:mb-1">Bldg Share (20%)</p>
+                                    <p className="text-base sm:text-lg font-mono text-gray-200">₹{financials.nextCycleBuildingShare.toLocaleString('en-IN')}</p>
                                 </div>
                              </div>
                          </div>
@@ -681,18 +686,18 @@ const AIFilmCourse = () => {
                          {/* Row 2: Annual */}
                          <div>
                              <h4 className="text-sm font-bold text-gray-300 border-b border-gray-600 pb-2 mb-3">Annual Projection (4 Cycles)</h4>
-                             <div className="grid grid-cols-3 gap-4">
-                                <div className="p-3 bg-slate-900 rounded-lg border border-slate-700/50">
-                                    <p className="text-[10px] text-gray-500 uppercase font-bold tracking-wider mb-1">Total Net Profit</p>
-                                    <p className="text-lg font-mono font-bold text-emerald-400">₹{financials.annualProfit.toLocaleString('en-IN')}</p>
+                             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                <div className="p-3 bg-slate-900 rounded-lg border border-slate-700/50 flex justify-between sm:block items-center">
+                                    <p className="text-[10px] text-gray-500 uppercase font-bold tracking-wider sm:mb-1">Total Net Profit</p>
+                                    <p className="text-base sm:text-lg font-mono font-bold text-emerald-400">₹{financials.annualProfit.toLocaleString('en-IN')}</p>
                                 </div>
-                                <div className="p-3 bg-slate-900 rounded-lg border border-slate-700/50">
-                                    <p className="text-[10px] text-purple-400 uppercase font-bold tracking-wider mb-1">Dot Share (80%)</p>
-                                    <p className="text-lg font-mono text-gray-200">₹{financials.annualDotShare.toLocaleString('en-IN')}</p>
+                                <div className="p-3 bg-slate-900 rounded-lg border border-slate-700/50 flex justify-between sm:block items-center">
+                                    <p className="text-[10px] text-purple-400 uppercase font-bold tracking-wider sm:mb-1">Dot Share (80%)</p>
+                                    <p className="text-base sm:text-lg font-mono text-gray-200">₹{financials.annualDotShare.toLocaleString('en-IN')}</p>
                                 </div>
-                                <div className="p-3 bg-slate-900 rounded-lg border border-slate-700/50">
-                                    <p className="text-[10px] text-amber-500 uppercase font-bold tracking-wider mb-1">Bldg Share (20%)</p>
-                                    <p className="text-lg font-mono text-gray-200">₹{financials.annualBuildingShare.toLocaleString('en-IN')}</p>
+                                <div className="p-3 bg-slate-900 rounded-lg border border-slate-700/50 flex justify-between sm:block items-center">
+                                    <p className="text-[10px] text-amber-500 uppercase font-bold tracking-wider sm:mb-1">Bldg Share (20%)</p>
+                                    <p className="text-base sm:text-lg font-mono text-gray-200">₹{financials.annualBuildingShare.toLocaleString('en-IN')}</p>
                                 </div>
                              </div>
                          </div>
@@ -704,7 +709,7 @@ const AIFilmCourse = () => {
               <div className="mt-10 text-center">
                 <button 
                   onClick={handleDownloadPDF}
-                  className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-3 rounded-lg font-bold transition-all shadow-lg active:scale-95"
+                  className="w-full md:w-auto inline-flex justify-center items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-3 rounded-lg font-bold transition-all shadow-lg active:scale-95"
                 >
                   <Download size={18} />
                   Download Financial Report (PDF)
@@ -743,21 +748,24 @@ const AIFilmCourse = () => {
             <div className="space-y-3">
               {weeks.map((week, idx) => (
                 <div key={idx} className="bg-slate-800 rounded-xl overflow-hidden border border-slate-700/50">
-                  <button onClick={() => setExpandedWeek(expandedWeek === idx ? null : idx)} className="w-full p-6 flex items-center justify-between hover:bg-slate-700/30 transition-colors">
-                    <div className="flex items-center gap-4 text-left">
-                      <div className="bg-slate-900 text-purple-400 w-12 h-12 rounded-lg flex items-center justify-center font-bold text-lg border border-slate-700">{week.week}</div>
-                      <div><h3 className="font-bold text-lg text-gray-100">{week.title}</h3><p className="text-sm text-gray-400">{week.hours} hours total</p></div>
+                  <button onClick={() => setExpandedWeek(expandedWeek === idx ? null : idx)} className="w-full p-6 flex items-center justify-between hover:bg-slate-700/30 transition-colors gap-2">
+                    <div className="flex items-center gap-4 text-left flex-1 min-w-0">
+                      <div className="shrink-0 bg-slate-900 text-purple-400 w-12 h-12 rounded-lg flex items-center justify-center font-bold text-lg border border-slate-700">{week.week}</div>
+                      <div className="min-w-0">
+                          <h3 className="font-bold text-lg text-gray-100 truncate">{week.title}</h3>
+                          <p className="text-sm text-gray-400 truncate">{week.hours} hours total</p>
+                      </div>
                     </div>
-                    {expandedWeek === idx ? <ChevronUp /> : <ChevronDown />}
+                    {expandedWeek === idx ? <ChevronUp className="shrink-0" /> : <ChevronDown className="shrink-0" />}
                   </button>
                   {expandedWeek === idx && (
                     <div className="px-6 pb-6 pt-0 bg-slate-800/50 border-t border-slate-700/50">
                       <div className="mt-4 grid md:grid-cols-2 gap-6">
                         <div className="space-y-3">
                           {week.sessions.map((s, si) => (
-                            <div key={si} className="flex justify-between text-sm p-2 rounded hover:bg-slate-700/30">
-                              <span className="text-purple-300 font-medium w-16">{s.day}</span>
-                              <span className="text-gray-300 flex-1 px-2">{s.topic}</span>
+                            <div key={si} className="flex flex-col sm:flex-row sm:justify-between text-sm p-2 rounded hover:bg-slate-700/30 gap-1 sm:gap-0">
+                              <span className="text-purple-300 font-medium sm:w-16">{s.day}</span>
+                              <span className="text-gray-300 flex-1 sm:px-2">{s.topic}</span>
                             </div>
                           ))}
                         </div>
@@ -794,9 +802,9 @@ const AIFilmCourse = () => {
         <div className="mt-12 text-center bg-gradient-to-t from-slate-900 to-slate-800 rounded-2xl p-8 border border-slate-700">
           <h2 className="text-2xl font-bold text-white mb-4">Ready to Launch?</h2>
           <div className="grid grid-cols-3 gap-4 max-w-lg mx-auto">
-            <div className="text-center p-4 bg-slate-900 rounded-xl"><div className="text-2xl font-bold text-white">10</div><div className="text-xs text-gray-500 uppercase">Weeks</div></div>
-            <div className="text-center p-4 bg-slate-900 rounded-xl"><div className="text-2xl font-bold text-white">135</div><div className="text-xs text-gray-500 uppercase">Hours</div></div>
-            <div className="text-center p-4 bg-slate-900 rounded-xl"><div className="text-2xl font-bold text-white">{studentCount}</div><div className="text-xs text-gray-500 uppercase">Batch Size</div></div>
+            <div className="text-center p-4 bg-slate-900 rounded-xl"><div className="text-xl md:text-2xl font-bold text-white">10</div><div className="text-[10px] md:text-xs text-gray-500 uppercase">Weeks</div></div>
+            <div className="text-center p-4 bg-slate-900 rounded-xl"><div className="text-xl md:text-2xl font-bold text-white">135</div><div className="text-[10px] md:text-xs text-gray-500 uppercase">Hours</div></div>
+            <div className="text-center p-4 bg-slate-900 rounded-xl"><div className="text-xl md:text-2xl font-bold text-white">{studentCount}</div><div className="text-[10px] md:text-xs text-gray-500 uppercase">Batch Size</div></div>
           </div>
         </div>
       </div>
